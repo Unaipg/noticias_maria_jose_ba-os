@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Libertad Mª José Baños</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text:    #1a1a1a;
+      --muted:   #6b7280;
+      --border:  #e5e7eb;
+      --accent:  #2563eb;
+      --bg:      #ffffff;
+      --surface: #f9fafb;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    /* ── Header ─────────────────────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      overflow: hidden;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,.55) 100%);
+    }
+
+    .hero-text {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(720px, 90%);
+      color: #fff;
+    }
+
+    .hero-text .tag {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.75);
+      margin-bottom: .6rem;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      text-shadow: 0 1px 6px rgba(0,0,0,.35);
+    }
+
+    .hero-text .byline {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: .85rem;
+      color: rgba(255,255,255,.7);
+      margin-top: .7rem;
+    }
+
+    /* ── Article body ────────────────────────────────── */
+    article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    article h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 2.5rem 0 .8rem;
+      line-height: 1.3;
+    }
+
+    article h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 2rem 0 .6rem;
+      color: var(--muted);
+    }
+
+    article p {
+      margin-bottom: 1.4rem;
+      font-size: 1.05rem;
+    }
+
+    /* ── Blockquote ──────────────────────────────────── */
+    blockquote {
+      margin: 2rem 0;
+      padding: 1.25rem 1.75rem;
+      border-left: 4px solid var(--accent);
+      background: var(--surface);
+      border-radius: 0 8px 8px 0;
+    }
+
+    blockquote p {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: #374151;
+      margin-bottom: .4rem;
+    }
+
+    blockquote cite {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: .8rem;
+      font-style: normal;
+      color: var(--muted);
+    }
+
+    /* ── Inline image ────────────────────────────────── */
+    .post-image {
+      margin: 2.5rem 0;
+    }
+
+    .post-image img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .post-image figcaption {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: .8rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: .6rem;
+    }
+
+    /* ── Gallery ─────────────────────────────────────── */
+    .gallery {
+      display: grid;
+      gap: .6rem;
+      margin: 2.5rem 0;
+    }
+
+    .gallery.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .gallery.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      cursor: zoom-in;
+      transition: opacity .2s;
+    }
+
+    .gallery img:hover { opacity: .88; }
+
+    .gallery-caption {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: .8rem;
+      color: var(--muted);
+      text-align: center;
+      grid-column: 1 / -1;
+      margin-top: .2rem;
+    }
+
+    /* ── Lightbox ────────────────────────────────────── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox img {
+      max-width: 92vw;
+      max-height: 92vh;
+      border-radius: 6px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.6);
+    }
+
+    /* ── Divider ─────────────────────────────────────── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Lists ───────────────────────────────────────── */
+    article ul, article ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.4rem;
+    }
+
+    article li {
+      margin-bottom: .4rem;
+      font-size: 1.05rem;
+    }
+
+    /* ── Standalone images inside articles ───────────── */
+    article > img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+      margin: 1.5rem 0;
+    }
+
+    /* ── Mobile ──────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero { height: 300px; }
+
+      .hero-text { bottom: 1.5rem; }
+
+      article {
+        padding: 2rem 1.1rem 3rem;
+      }
+
+      article h2 { font-size: 1.3rem; }
+
+      blockquote {
+        padding: .9rem 1.1rem;
+      }
+
+      blockquote p { font-size: 1rem; }
+
+      .gallery.cols-3 { grid-template-columns: 1fr; }
+      .gallery.cols-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Hero header ─────────────────────────────────── -->
+  <header class="hero">
+    <img src="images/header.png"
+         alt="Header image" />
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <p class="tag">Por la Amnistía Total</p>
+      <h1>LIBERTAD Mª JOSÉ BAÑOS</h1>
+      <!--<p class="byline">By Mariajo &nbsp;·&nbsp; March 2026</p>-->
+    </div>
+  </header>
+
+  <!-- ── Article ─────────────────────────────────────── -->
+  <article>
+    <!-- Single image -->
+    <figure class="post-image">
+      <img src="images/ayunos.jpg"
+      alt="Campaña de ayunos por la libertad de Mª José Baños." />
+      <figcaption>Campaña de ayunos por la libertad de Mª José Baños.</figcaption>
+    </figure>
+
+    <h2>Una nueva semana de ayunos solidarios con Mª José Baños</h2>
+
+    <p>Continúa una semana más la campaña de ayunos solidarios que están llevando a cabo cada vez más presos pidiendo la libertad inmediata de Mª José Baños. La lista de presos y las jornadas de ayuno que llevan es:</p>
+    <ul>
+      <li>Víctoria Gómez, presa política de los GRAPO, 71 años. Lleva 8 jornadas de ayuno.</li>
+      <li>Juan García, preso político del PCE (r), 74 años. Lleva 8 jornadas de ayuno.</li>
+      <li>Israel Torralba, preso político de los GRAPO, 51 años. Lleva 8 jornadas de ayuno.</li>
+      <li>Nacho Varela, preso político de los GRAPO, 49 años. Lleva 8 jornadas de ayuno.</li>
+      <li>Daniel Pastor, preso político comunista, 52 años. Lleva 7 jornadas de ayuno.</li>
+      <li>Patxi Ruiz, preso político vasco, 51 años. Lleva 6 jornadas de ayuno.</li>
+      <li>Israel Clemente, preso político de los GRAPO, 55 años. Lleva 5 jornadas de ayuno.</li>
+      <li>Fernando García Jodra, preso político vasco, 55 años. Lleva 5 jornadas de ayuno.</li>
+      <li>Pablo Hasel, preso político antifascista, 37 años. LLeva 5 jornadas de ayuno.</li>
+      <li>Andoni Goikoetxea, preso político vasco, 54 años. Lleva 5 jornadas de ayuno.</li>
+      <li>José Ángel Martins Mendoza, preso social anarquista, 50 años. Lleva 2 jornadas de ayuno.</li>
+    </ul>
+  </article>
+  <hr>
+
+  <article>
+    <figure class="post-image">
+      <img src="images/bolivar.png"
+           alt="Publicación de la coordinadora Simón Bolívar en Tiktok." />
+      <figcaption>Publicación de la coordinadora Simón Bolívar en Tiktok.</figcaption>
+    </figure>
+    <h2>La coordinadora Simón Bolívar pide la libertad de Mª José Baños desde Venezuela</h2>
+    <blockquote>
+      <p>El estado fascista español con sus progresias capitalistas al frente muestran vez tras vez su realidad de sádicos fascistas confirmando que quieren asesinar a María José dentro de los presidios .. su artimaña de  vengativos  mentirosos que para acallar la  Gran Campaña Solidaria por María José mienten sin escrúpulos es infame y muestra la realidad de todos ellos como la horda de parásitos mantenidos criminales que se excitan torturando y asesinando para  manter al putrefacto cruel estado fascista español y con él sus chorreantes de sangre  sillones .. tácticas del fascismo y sus progresias que deberian recibir una respuesta organizada y violenta en las Calles ya que la Solidaridad y Humanidad es nada para ellos .. </p>
+      <p>Serian las sedes de los partiduchos en el gobierno las que fueran objetivo directo de un Nuevo Paso en la Campaña por María José.</p>
+      <p>MARIA JOSÉ LIBERTAD INMEDIATA PARA YA </p>
+      <p>No tienen palabra no tienen escrúpulos no tienen nada que merezca ser salvado . </p>
+      <p>A por las sedes de las progresias del capital</p>
+
+      <!--<cite>— John Muir</cite-->
+    </blockquote>
+
+  </article>
+  <hr>
+
+  <article>
+    <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Hasél: +5 años secuestrado por rapear y tuitear. En libertad todos los mayores genocidas y corruptos.<br><br>¡Libertad presos políticos! <a href="https://t.co/tMtGmAltHR">pic.twitter.com/tMtGmAltHR</a></p>&mdash; Accountable (@Accountable2019) <a href="https://twitter.com/Accountable2019/status/2038951524672348170?ref_src=twsrc%5Etfw">March 31, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+    <h2>Accountable se hace eco de los casos de Pablo Hasel y Mª José Baños</h2>
+  </article>
+  <hr>
+
+  <article>
+    <h2>Continúan las acciones solidarias en todo el Estado</h2>
+
+    <figure class="post-image">
+      <img src="images/barna.png"
+           alt="Cartelada en Barcelona." />
+      <figcaption>Cartelada en Barcelona.</figcaption>
+    </figure>
+    <blockquote>
+      <p>CONTINUEM ALS CARRERS FINS QUE SIGUI LLIURE!!</p>
+      <p>No podem oblidar-nos que la María José Baños continua tancada a la presó, sense rebre cap tipus de tractament mèdic, tot i haver assolit la classificació de tercer grau per tenir una malaltia greu i incurable.</p>
+      <p>Els carrers de Barcelona continuen cridant per la seva llibertat!!</p>
+    </blockquote>
+
+    <blockquote>
+      <p>¡SEGUIMOS EN LAS CALLES HASTA QUE SEA LIBRE!</p>
+      <p>No podemos olvidarnos de que María José Baños sigue encerrada en prisión, sin recibir ningún tipo de tratamiento médico, a pesar de haber obtenido la clasificación de tercer grado por padecer una enfermedad grave e incurable.</p>
+      <p>¡Las calles de Barcelona siguen gritando por su libertad!</p>
+    </blockquote>
+
+    <!-- 3-column gallery -->
+    <div class="gallery cols-3">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=75" alt="Snowy peak" />
+      <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=75" alt="Green valley" />
+      <img src="https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=600&q=75" alt="Mountain lake" />
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=75" alt="Sunrise" />
+      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=75" alt="Trail" />
+      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=75" alt="Forest path" />
+      <p class="gallery-caption">Photos taken between February and March 2026.</p>
+    </div>
+
+    <!-- 2-column gallery -->
+    <div class="gallery cols-2" style="margin-top:1rem">
+      <img src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=700&q=75" alt="Peaks" />
+      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700&q=75" alt="Woods" />
+    </div>
+
+    <hr />
+
+    <p>
+      A diario se realizan nuevas acciones en cada rincón del Estado y continuarán 
+      hasta que conquistemos la libertad de Mª José Baños.
+    </p>
+
+  </article>
+
+  <hr>
+
+
+  <!-- ── Lightbox ─────────────────────────────────────── -->
+  <div id="lightbox">
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lbImg    = document.getElementById('lightbox-img');
+
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('click', () => {
+        lbImg.src = img.src.replace(/w=\d+/, 'w=1400');
+        lbImg.alt = img.alt;
+        lightbox.classList.add('open');
+      });
+    });
+
+    lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') lightbox.classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>
