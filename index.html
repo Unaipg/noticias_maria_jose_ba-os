@@ -224,6 +224,65 @@
       margin: 1.5rem 0;
     }
 
+    /* ── Page date ───────────────────────────────────── */
+    .page-date {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Page content area ───────────────────────────── */
+    #page-content {
+      transition: opacity .15s ease;
+      min-height: 12rem;
+    }
+
+    /* ── Pagination nav ──────────────────────────────── */
+    .page-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem 1.5rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .nav-btn {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: .85rem;
+      font-weight: 600;
+      padding: .5rem 1.25rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background .15s, border-color .15s;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: var(--border);
+    }
+
+    .nav-btn:disabled {
+      opacity: .35;
+      cursor: default;
+    }
+
+    #nav-indicator {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: .8rem;
+      color: var(--muted);
+      min-width: 6rem;
+      text-align: center;
+    }
+
     /* ── Mobile ──────────────────────────────────────── */
     @media (max-width: 600px) {
       .hero { height: 300px; }
@@ -244,6 +303,9 @@
 
       .gallery.cols-3 { grid-template-columns: 1fr; }
       .gallery.cols-2 { grid-template-columns: 1fr; }
+
+      .page-nav { gap: .75rem; }
+      .nav-btn { font-size: .78rem; padding: .45rem .9rem; }
     }
   </style>
 </head>
@@ -261,104 +323,15 @@
     </div>
   </header>
 
-  <!-- ── Article ─────────────────────────────────────── -->
-  <article>
-    <!-- Single image -->
-    <figure class="post-image">
-      <img src="images/ayunos.jpg"
-      alt="Campaña de ayunos por la libertad de Mª José Baños." />
-      <figcaption>Campaña de ayunos por la libertad de Mª José Baños.</figcaption>
-    </figure>
+  <!-- ── Page content (lazy-loaded) ─────────────────── -->
+  <div id="page-content"></div>
 
-    <h2>Una nueva semana de ayunos solidarios con Mª José Baños</h2>
-
-    <p>Continúa una semana más la campaña de ayunos solidarios que están llevando a cabo cada vez más presos pidiendo la libertad inmediata de Mª José Baños. La lista de presos y las jornadas de ayuno que llevan es:</p>
-    <ul>
-      <li>Víctoria Gómez, presa política de los GRAPO, 71 años. Lleva 8 jornadas de ayuno.</li>
-      <li>Juan García, preso político del PCE (r), 74 años. Lleva 8 jornadas de ayuno.</li>
-      <li>Israel Torralba, preso político de los GRAPO, 51 años. Lleva 8 jornadas de ayuno.</li>
-      <li>Nacho Varela, preso político de los GRAPO, 49 años. Lleva 8 jornadas de ayuno.</li>
-      <li>Daniel Pastor, preso político comunista, 52 años. Lleva 7 jornadas de ayuno.</li>
-      <li>Patxi Ruiz, preso político vasco, 51 años. Lleva 6 jornadas de ayuno.</li>
-      <li>Israel Clemente, preso político de los GRAPO, 55 años. Lleva 5 jornadas de ayuno.</li>
-      <li>Fernando García Jodra, preso político vasco, 55 años. Lleva 5 jornadas de ayuno.</li>
-      <li>Pablo Hasel, preso político antifascista, 37 años. LLeva 5 jornadas de ayuno.</li>
-      <li>Andoni Goikoetxea, preso político vasco, 54 años. Lleva 5 jornadas de ayuno.</li>
-      <li>José Ángel Martins Mendoza, preso social anarquista, 50 años. Lleva 2 jornadas de ayuno.</li>
-    </ul>
-  </article>
-  <hr>
-
-  <article>
-    <figure class="post-image">
-      <img src="images/bolivar.png"
-           alt="Publicación de la coordinadora Simón Bolívar en Tiktok." />
-      <figcaption>Publicación de la coordinadora Simón Bolívar en Tiktok.</figcaption>
-    </figure>
-    <h2>La coordinadora Simón Bolívar pide la libertad de Mª José Baños desde Venezuela</h2>
-    <blockquote>
-      <p>El estado fascista español con sus progresias capitalistas al frente muestran vez tras vez su realidad de sádicos fascistas confirmando que quieren asesinar a María José dentro de los presidios .. su artimaña de  vengativos  mentirosos que para acallar la  Gran Campaña Solidaria por María José mienten sin escrúpulos es infame y muestra la realidad de todos ellos como la horda de parásitos mantenidos criminales que se excitan torturando y asesinando para  manter al putrefacto cruel estado fascista español y con él sus chorreantes de sangre  sillones .. tácticas del fascismo y sus progresias que deberian recibir una respuesta organizada y violenta en las Calles ya que la Solidaridad y Humanidad es nada para ellos .. </p>
-      <p>Serian las sedes de los partiduchos en el gobierno las que fueran objetivo directo de un Nuevo Paso en la Campaña por María José.</p>
-      <p>MARIA JOSÉ LIBERTAD INMEDIATA PARA YA </p>
-      <p>No tienen palabra no tienen escrúpulos no tienen nada que merezca ser salvado . </p>
-      <p>A por las sedes de las progresias del capital</p>
-
-      <!--<cite>— John Muir</cite-->
-    </blockquote>
-
-  </article>
-  <hr>
-
-  <article>
-    <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Hasél: +5 años secuestrado por rapear y tuitear. En libertad todos los mayores genocidas y corruptos.<br><br>¡Libertad presos políticos! <a href="https://t.co/tMtGmAltHR">pic.twitter.com/tMtGmAltHR</a></p>&mdash; Accountable (@Accountable2019) <a href="https://twitter.com/Accountable2019/status/2038951524672348170?ref_src=twsrc%5Etfw">March 31, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
-    <h2>Accountable se hace eco de los casos de Pablo Hasel y Mª José Baños</h2>
-  </article>
-  <hr>
-
-  <article>
-    <h2>Continúan las acciones solidarias en todo el Estado</h2>
-
-    <!-- 3-column gallery -->
-    <div class="gallery cols-3">
-      <img src="images/marijose(1).jpg" alt="Cartelada galiza" />
-      <img src="images/marijose2.jpg" alt="Cartelada galiza" />
-      <img src="images/marijose3.jpg" alt="Cartelada galiza" />
-      <p class="gallery-caption">Cartelada delante de los juzgados, Galiza.</p>
-    </div>
-
-    <figure class="post-image">
-      <img src="images/barna.png"
-           alt="Cartelada en Barcelona." />
-      <figcaption>Cartelada en Barcelona.</figcaption>
-    </figure>
-    <blockquote>
-      <p>CONTINUEM ALS CARRERS FINS QUE SIGUI LLIURE!!</p>
-      <p>No podem oblidar-nos que la María José Baños continua tancada a la presó, sense rebre cap tipus de tractament mèdic, tot i haver assolit la classificació de tercer grau per tenir una malaltia greu i incurable.</p>
-      <p>Els carrers de Barcelona continuen cridant per la seva llibertat!!</p>
-    </blockquote>
-
-    <blockquote>
-      <p>¡SEGUIMOS EN LAS CALLES HASTA QUE SEA LIBRE!</p>
-      <p>No podemos olvidarnos de que María José Baños sigue encerrada en prisión, sin recibir ningún tipo de tratamiento médico, a pesar de haber obtenido la clasificación de tercer grado por padecer una enfermedad grave e incurable.</p>
-      <p>¡Las calles de Barcelona siguen gritando por su libertad!</p>
-    </blockquote>
-
-    <div class="gallery cols-3">
-      <img src="images/vk1.JPG" alt="Cartelada vallekas" />
-      <img src="images/vk3.JPG" alt="Cartelada vallekas" />
-      <img src="images/vk4.JPG" alt="Cartelada vallekas" />
-      <p class="gallery-caption">Pintadas en la zona de Nueva Numancia en Vallekas, Madrid.</p>
-    </div>
-
-    <p>
-      A diario se realizan nuevas acciones en cada rincón del Estado y continuarán 
-      hasta que conquistemos la libertad de Mª José Baños.
-    </p>
-
-  </article>
-
-  <hr>
-
+  <!-- ── Pagination ─────────────────────────────────── -->
+  <nav class="page-nav">
+    <button id="nav-prev" class="nav-btn" disabled>← Actualización anterior</button>
+    <span id="nav-indicator"></span>
+    <button id="nav-next" class="nav-btn" disabled>Actualización siguiente →</button>
+  </nav>
 
   <!-- ── Lightbox ─────────────────────────────────────── -->
   <div id="lightbox">
@@ -368,22 +341,98 @@
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
   <script>
-    const lightbox = document.getElementById('lightbox');
-    const lbImg    = document.getElementById('lightbox-img');
+    /*
+     * PÁGINAS
+     * Ordenadas de más antigua (índice 0) a más reciente (último índice).
+     * Para añadir una nueva actualización crea pages/ddmmyy.html y añádela al final:
+     *   { date: '100426', file: 'pages/100426.html' },
+     */
+    const PAGES = [
+      { date: '020426', file: 'pages/020426.html' },
+      /*{ date: '040426', file: 'pages/040426.html' }, */
+    ];
 
-    document.querySelectorAll('.gallery img').forEach(img => {
-      img.addEventListener('click', () => {
-        lbImg.src = img.src.replace(/w=\d+/, 'w=1400');
-        lbImg.alt = img.alt;
-        lightbox.classList.add('open');
+    const container = document.getElementById('page-content');
+    const prevBtn   = document.getElementById('nav-prev');
+    const nextBtn   = document.getElementById('nav-next');
+    const indicator = document.getElementById('nav-indicator');
+    const lightbox  = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lightbox-img');
+
+    const cache = {};
+    let current = PAGES.length - 1; // start at the most recent page
+
+    function initLightbox() {
+      container.querySelectorAll('.gallery img').forEach(img => {
+        img.addEventListener('click', () => {
+          lbImg.src = img.src;
+          lbImg.alt = img.alt;
+          lightbox.classList.add('open');
+        });
       });
-    });
+    }
 
     lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
-
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') lightbox.classList.remove('open');
     });
+
+    function updateNav() {
+      const total = PAGES.length;
+      const humanIndex = total - current; // newest = 1, oldest = total
+      indicator.textContent = `Actualización ${humanIndex} / ${total}`;
+      prevBtn.disabled = current <= 0;
+      nextBtn.disabled = current >= PAGES.length - 1;
+    }
+
+    async function showPage(index, { pushHistory = true } = {}) {
+      if (!cache[index]) {
+        container.style.opacity = '.35';
+        try {
+          const res = await fetch(PAGES[index].file);
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          cache[index] = await res.text();
+        } catch (err) {
+          container.innerHTML = '<p style="color:var(--muted);text-align:center;padding:4rem 1.5rem;">Error al cargar la actualización.</p>';
+          container.style.opacity = '1';
+          return;
+        }
+      }
+
+      container.innerHTML = cache[index];
+      container.style.opacity = '1';
+      current = index;
+
+      initLightbox();
+
+      if (window.twttr && twttr.widgets) {
+        twttr.widgets.load(container);
+      }
+
+      updateNav();
+
+      // Update URL hash so the page is directly linkable (#1 = oldest, #N = newest)
+      if (pushHistory) {
+        history.pushState({ index }, '', '#' + PAGES[index].date);
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    prevBtn.addEventListener('click', () => showPage(current - 1));
+    nextBtn.addEventListener('click', () => showPage(current + 1));
+
+    // Back/forward browser navigation
+    window.addEventListener('popstate', e => {
+      const index = e.state?.index ?? PAGES.length - 1;
+      showPage(index, { pushHistory: false });
+    });
+
+    // Resolve initial page from hash, defaulting to most recent
+    const hashDate   = location.hash.slice(1);
+    const hashIndex  = PAGES.findIndex(p => p.date === hashDate);
+    const startIndex = hashIndex !== -1 ? hashIndex : PAGES.length - 1;
+    showPage(startIndex);
   </script>
 
 </body>
