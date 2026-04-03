@@ -82,7 +82,7 @@
     article {
       max-width: 720px;
       margin: 0 auto;
-      padding: 3rem 1.5rem 5rem;
+      padding: 1rem 1.5rem 1.5rem;
     }
 
     article h2 {
@@ -202,7 +202,7 @@
     hr {
       border: none;
       border-top: 1px solid var(--border);
-      margin: 2.5rem 0;
+      margin: 1rem 0;
     }
 
     /* ── Lists ───────────────────────────────────────── */
@@ -222,6 +222,13 @@
       border-radius: 10px;
       display: block;
       margin: 1.5rem 0;
+    }
+
+    /* ── Audio player ────────────────────────────────── */
+    .audio-player {
+      width: 100%;
+      margin: 1.5rem 0;
+      border-radius: 8px;
     }
 
     /* ── Page date ───────────────────────────────────── */
@@ -349,7 +356,7 @@
      */
     const PAGES = [
       { date: '020426', file: 'pages/020426.html' },
-      /*{ date: '040426', file: 'pages/040426.html' }, */
+      { date: '040426', file: 'pages/040426.html' },
     ];
 
     const container = document.getElementById('page-content');
